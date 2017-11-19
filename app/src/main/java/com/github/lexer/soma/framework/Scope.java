@@ -25,7 +25,7 @@ public class Scope {
     public Scope createChild(String name) {
         Scope scope = new Scope(this, name);
 
-        this.children.add(parentScope);
+        this.children.add(scope);
 
         return scope;
     }
