@@ -13,6 +13,7 @@ public class LoggedOutRouter extends Router {
 
     private final UserService userService;
     private ViewGroup rootView;
+    private View controllerView;
 
     public LoggedOutRouter(Scope newScope, ViewGroup rootView) {
         super(newScope, rootView);
@@ -27,8 +28,15 @@ public class LoggedOutRouter extends Router {
         super.onScopeEnter();
 
         ViewController signViewController = new SignInViewController(userService);
-        View controllerView = Controllers.createAndBind(R.layout.sigin, rootView, signViewController);
+        controllerView = Controllers.createAndBind(R.layout.sigin, rootView, signViewController);
 
         rootView.addView(controllerView);
+    }
+
+    @Override
+    public void onScopeExit() {
+        super.onScopeExit();
+
+        rootView.removeView(controllerView);
     }
 }

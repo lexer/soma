@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_1">
+    >
 
-    <TextView
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="Home"
-        />
+        android:layout_height="match_parent"
+        >
+        <!-- The main content view -->
+        <FrameLayout
+            android:id="@+id/home_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/green_1"
+            />
+        <!-- The navigation drawer -->
+        <FrameLayout
+            android:id="@+id/navigation"
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/red_1"
+            />
+    </android.support.v4.widget.DrawerLayout>
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/secondary_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</FrameLayout>

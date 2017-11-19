@@ -1,4 +1,4 @@
-package com.github.lexer.soma.loggedin;
+package com.github.lexer.soma.loggedin.settings;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,33 +9,27 @@ import com.github.lexer.soma.framework.Scope;
 import com.github.lexer.soma.framework.ViewController;
 import com.github.lexer.soma.models.UserService;
 
-public class LoggedInRouter extends Router {
+public class SettingsRouter extends Router {
 
     private final UserService userService;
-    private Scope scope;
     private ViewGroup rootView;
     private View controllerView;
 
-    public LoggedInRouter(Scope scope, ViewGroup rootView) {
+    public SettingsRouter(Scope scope, ViewGroup rootView) {
         super(scope, rootView);
+        this.rootView = rootView;
 
         userService = scope.getService("user_service");
-        this.scope = scope;
-
-        this.rootView = rootView;
     }
 
     @Override
     public void onScopeEnter() {
         super.onScopeEnter();
 
-        ViewController homeViewController = new HomeViewController();
-        controllerView = Controllers.createAndBind(R.layout.home, rootView, homeViewController);
+        ViewController viewController = new SettingsViewController(userService);
+        controllerView = Controllers.createAndBind(R.layout.settings, rootView, viewController);
 
         rootView.addView(controllerView);
-
-        MenuRouter menuRouter = new MenuRouter(scope, rootView);
-        scope.addService("menu_router", menuRouter);
     }
 
     @Override
